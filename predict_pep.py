@@ -52,9 +52,9 @@ def get_one_sample(data_inputs,data_targets,idx=None):
 if __name__=='__main__':
     array_change_zeros = np.vectorize(change_zeros)         
     
-    #data_file = sys.argv[1]
+    data_file = sys.argv[1]
     #data_file = 'curated_train_set.csv'
-    inputs,targets = extract_data('curated_train_set.csv')
+    inputs,targets = extract_data(data_file)
     
     #define the network structure:
     input_features = len(inputs[0])         #the number of columns in the data matrix (this will be the number of input nodes to the network's first layer)
