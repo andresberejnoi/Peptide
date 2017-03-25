@@ -18,10 +18,10 @@ def extract_data(filename):
         np.random.shuffle(data)
         
         #normalize the data
-        data = norm(data,axis=0)  #with axis=0, each column in normalized independently of each other
+        #data = norm(data,axis=0)  #with axis=0, each column in normalized independently of each other
         
         #split inputs from target outputs (assume last column corresponds to labels or targets)
-        inputs = data[:,:-1]
+        inputs = norm(data[:,:-1],axis=0)
         targets = data[:,-1] #
         targets = np.reshape(a=targets,newshape=(len(targets),1))           #targets should have the shape of [number of sumples x number of output features per sample]
         
@@ -52,7 +52,7 @@ def get_one_sample(data_inputs,data_targets,idx=None):
 if __name__=='__main__':
     array_change_zeros = np.vectorize(change_zeros)         
     
-    data_file = sys.argv[1]
+    data_file = sys.argv[1]         #file containing the data
     #data_file = 'curated_train_set.csv'
     inputs,targets = extract_data(data_file)
     
@@ -63,11 +63,11 @@ if __name__=='__main__':
     #create the model
     topology = [input_features,5,output_features]
     try:
-        max_epochs = int(sys.argv[4])
+        max_epochs = int(sys.argv[4])       #how many training epochs to run?
     except:
         max_epochs = 1000    
-    batch_size = int(sys.argv[2])
-    print_rate = int(sys.argv[3])
+    batch_size = int(sys.argv[2])           #how many samples per iteration: number of iterations = number of epochs / batch size
+    print_rate = int(sys.argv[3])           #how often should training updates be printed? decreased for higher frequency
     net = nb.Network(topology=topology,learningRate=0.01)
     net.set_hiddenactivation_fun('sigmoid')
     net.set_outActivation_fun('sigmoid')
