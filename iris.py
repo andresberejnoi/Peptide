@@ -3,7 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-
+import pandas as pd
 
 import tensorflow as tf
 import numpy as np
@@ -12,14 +12,10 @@ IRIS_TRAINING = "curated_train_set.csv"
 IRIS_TEST = "testdata.csv"
 
 # Load datasets.
-training_set = tf.contrib.learn.datasets.base.load_csv(
-    filename=IRIS_TRAINING,
-    target_dtype=np.int)
-test_set = tf.contrib.learn.datasets.base.load_csv(
-    filename=IRIS_TEST,
-    target_dtype=np.int)
-#specify that all features have real-value data
-feature_columns = [tf.contrib.layers.real_valued_column("", dimension=4)]
+training_set = tf.contrib.learn.datasets.base.load_csv(filename=IRIS_TRAINING,
+                                                       target_dtype=np.int)
+test_set = tf.contrib.learn.datasets.base.load_csv(filename=IRIS_TEST,
+                                                   target_dtype=np.int)
 
 #Build 3 layer DNN with 10,20,10 units respectively.
 classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
