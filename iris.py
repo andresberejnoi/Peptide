@@ -16,6 +16,8 @@ training_set = tf.contrib.learn.datasets.base.load_csv(filename=IRIS_TRAINING,
                                                        target_dtype=np.int)
 test_set = tf.contrib.learn.datasets.base.load_csv(filename=IRIS_TEST,
                                                    target_dtype=np.int)
+# Specify that all features have real-value data
+feature_columns = [tf.contrib.layers.real_valued_column("", dimension=5)]
 
 #Build 3 layer DNN with 10,20,10 units respectively.
 classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
