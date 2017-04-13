@@ -20,7 +20,7 @@ test_set = tf.contrib.learn.datasets.base.load_csv(filename=IRIS_TEST,
 #Build 3 layer DNN with 10,20,10 units respectively.
 classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
                                             hidden_units=[10, 20, 10],
-                                            n_classes=3,
+                                            n_classes=2,
                                             model_dir="/tmp/iris_model")
 # Define the test inputs
 def get_train_inputs():
