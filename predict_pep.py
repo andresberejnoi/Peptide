@@ -5,7 +5,7 @@ Created on Sat Mar 18 20:55:39 2017
 
 @author: Andres Berejnoi
 """
-import NetBuilder as nb
+import netbuilder as nb
 import numpy as np
 import sys
 from sklearn.preprocessing import normalize as norm
@@ -68,14 +68,14 @@ if __name__=='__main__':
         max_epochs = 1000    
     batch_size = int(sys.argv[2])           #how many samples per iteration: number of iterations = number of epochs / batch size
     print_rate = int(sys.argv[3])           #how often should training updates be printed? decreased for higher frequency
-    net = nb.Network(topology=topology,learningRate=0.01)
-    net.set_hiddenactivation_fun('sigmoid')
-    net.set_outActivation_fun('sigmoid')
+    net = nb.Network()
+    net.init(topology=topology,learningRate=0.01)
     net.train(input_set=inputs,
               target_set=targets,
               epochs=max_epochs,
               batch_size=batch_size,
-              print_rate=print_rate)
+              print_rate=print_rate,
+              plot=True)
     
     #Saved the state of the network:
     net.save('peptideNet.csv')
