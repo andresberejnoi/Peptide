@@ -61,13 +61,12 @@ if __name__=='__main__':
     output_features = len(targets[0])       #this should be 1 (this will be the number of output nodes to the last layer)
     
     #create the model
-    topology = [input_features,5,output_features]
-    try:
-        max_epochs = int(sys.argv[4])       #how many training epochs to run?
-    except:
-        max_epochs = 1000    
+    topology = [input_features,5,output_features]  
+    
     batch_size = int(sys.argv[2])           #how many samples per iteration: number of iterations = number of epochs / batch size
     print_rate = int(sys.argv[3])           #how often should training updates be printed? decreased for higher frequency
+    max_epochs = int(sys.argv[4])       #how many training epochs to run? 
+    
     net = nb.Network()
     net.init(topology=topology,learningRate=0.01)
     net.train(input_set=inputs,
@@ -78,7 +77,7 @@ if __name__=='__main__':
               plot=True)
     
     #Saved the state of the network:
-    net.save('peptideNet.csv')
+    nb.save_model()
     print('='*80,'\nTEST\n:')
     test_in,test_tar = get_one_sample(inputs,targets)
     test_out = net.feedforward(test_in)
